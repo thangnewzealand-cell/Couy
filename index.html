@@ -1,0 +1,303 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="An interactive web app illustrating the Có Uy leadership model in the Vietnamese educational context."
+    />
+    <title>Có Uy Leadership Lab</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&family=Libre+Baskerville:ital@0;1&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="brand" href="#lab" aria-label="Có Uy Leadership Lab">
+        <span class="brand-mark">UY</span>
+        <span>
+          <strong>Có Uy</strong>
+          <small>Leadership Lab</small>
+        </span>
+      </a>
+      <nav class="header-nav" aria-label="Main navigation">
+        <a href="#lab">Explore</a>
+        <a href="#context">Context</a>
+        <a href="#simulator">Scenarios</a>
+      </nav>
+      <a class="source-link" href="#about">About the model <span>↘</span></a>
+    </header>
+
+    <main>
+      <section class="hero">
+        <div class="hero-copy">
+          <p class="eyebrow">An indigenous leadership model · Vietnam</p>
+          <h1>Authority creates order.<br /><em>Prestige</em> creates commitment.</h1>
+          <p class="hero-description">
+            Explore how <strong>Lý</strong> and <strong>Tình</strong> work together to create
+            <strong>Có Uy</strong> leadership in Vietnamese schools.
+          </p>
+          <a class="primary-cta" href="#lab">Start exploring <span>↓</span></a>
+        </div>
+        <div class="hero-quote">
+          <p>“We need an iron hand,<br />but the iron hand must be<br /><em>a clean hand.</em>”</p>
+          <span>— Vietnamese aphorism cited in the study</span>
+        </div>
+      </section>
+
+      <section class="lab-section" id="lab">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">01 · Leadership Lab</p>
+            <h2>Place the leader on the matrix</h2>
+          </div>
+          <p>
+            Drag the point on the matrix or use the sliders. Observe how staff responses change
+            as the two sources of influence are combined.
+          </p>
+        </div>
+
+        <div class="lab-layout">
+          <aside class="control-panel">
+            <div class="panel-heading">
+              <span class="panel-number">01</span>
+              <div>
+                <p>Adjust</p>
+                <h3>Leadership profile</h3>
+              </div>
+            </div>
+
+            <div class="slider-control">
+              <div class="slider-label">
+                <label for="authority-range">Authority <span>/ Lý</span></label>
+                <output id="authority-output" for="authority-range">74</output>
+              </div>
+              <input
+                id="authority-range"
+                data-testid="authority-range"
+                type="range"
+                min="0"
+                max="100"
+                value="74"
+                aria-label="Authority level"
+              />
+              <div class="scale-labels"><span>Low</span><span>High</span></div>
+            </div>
+
+            <div class="slider-control moral">
+              <div class="slider-label">
+                <label for="moral-range">Moral prestige <span>/ Tình</span></label>
+                <output id="moral-output" for="moral-range">82</output>
+              </div>
+              <input
+                id="moral-range"
+                data-testid="moral-range"
+                type="range"
+                min="0"
+                max="100"
+                value="82"
+                aria-label="Moral prestige level"
+              />
+              <div class="scale-labels"><span>Low</span><span>High</span></div>
+            </div>
+
+            <button class="reset-button" id="reset-profile" type="button">
+              Reset profile <span>↺</span>
+            </button>
+
+            <div class="legend">
+              <p>Two sources of influence</p>
+              <div><i class="dot red"></i><span>Legitimate authority</span></div>
+              <div><i class="dot blue"></i><span>Moral prestige</span></div>
+            </div>
+          </aside>
+
+          <div class="matrix-card">
+            <div class="matrix-topline">
+              <span>High authority</span>
+              <span class="matrix-hint">Drag the point to explore</span>
+            </div>
+            <div
+              class="matrix"
+              id="leadership-matrix"
+              data-testid="leadership-matrix"
+              role="application"
+              aria-label="Leadership matrix. Drag the point to adjust authority and moral prestige."
+            >
+              <div class="quadrant q2">
+                <span class="quadrant-code">Q2</span>
+                <strong>The nice leader</strong>
+                <small>Trust, but a risk of weak discipline</small>
+              </div>
+              <div class="quadrant q1">
+                <span class="quadrant-code">Q1</span>
+                <strong>Có Uy</strong>
+                <small>Compliance and commitment</small>
+              </div>
+              <div class="quadrant q3">
+                <span class="quadrant-code">Q3</span>
+                <strong>Low influence</strong>
+                <small>Loss of trust and order</small>
+              </div>
+              <div class="quadrant q4">
+                <span class="quadrant-code">Q4</span>
+                <strong>Authoritarian</strong>
+                <small>Compliance without commitment</small>
+              </div>
+              <span class="axis axis-y">Authority · Lý</span>
+              <span class="axis axis-x">Moral prestige · Tình</span>
+              <span class="axis-low axis-left">Low</span>
+              <span class="axis-high axis-right">High</span>
+              <span class="axis-low axis-bottom">Low</span>
+              <button
+                class="matrix-point"
+                id="matrix-point"
+                data-testid="matrix-point"
+                type="button"
+                aria-label="Current leadership profile"
+              >
+                <span></span>
+              </button>
+            </div>
+          </div>
+
+          <aside class="result-panel">
+            <div class="result-header">
+              <span class="status-pill" id="quadrant-code">Q1 · Integrated</span>
+              <h3 id="profile-title">Có Uy leadership</h3>
+              <p id="profile-description">
+                Combines legitimate authority with moral character to foster both compliance and
+                commitment.
+              </p>
+            </div>
+            <div class="outcomes" id="outcome-list" aria-live="polite"></div>
+            <div class="profile-note">
+              <span>Key insight</span>
+              <p id="profile-note">Authority creates order. Prestige turns compliance into commitment.</p>
+            </div>
+          </aside>
+        </div>
+      </section>
+
+      <section class="context-section" id="context">
+        <div class="section-heading light">
+          <div>
+            <p class="eyebrow">02 · Context Explorer</p>
+            <h2>The model does not exist outside its context</h2>
+          </div>
+          <p>
+            Select each contextual layer to see how it exerts pressure on the two leadership axes.
+          </p>
+        </div>
+
+        <div class="context-layout">
+          <div class="context-list" id="context-list"></div>
+          <div class="context-visual">
+            <div class="orbit orbit-outer">
+              <span>Institutions</span>
+              <div class="orbit orbit-middle">
+                <span>Culture</span>
+                <div class="orbit orbit-inner">
+                  <span>School</span>
+                  <div class="orbit-core">Có<br />Uy</div>
+                </div>
+              </div>
+            </div>
+            <p id="context-insight">
+              These contextual layers shape how authority is perceived and how prestige is built.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section class="practice-section">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">03 · Lý & Tình</p>
+            <h2>Two complementary toolkits</h2>
+          </div>
+          <p>Select a behavior to see how it contributes to each source of influence.</p>
+        </div>
+
+        <div class="practice-grid" id="practice-grid"></div>
+      </section>
+
+      <section class="simulator-section" id="simulator">
+        <div class="section-heading light">
+          <div>
+            <p class="eyebrow">04 · Scenario Simulator</p>
+            <h2>Explore a leadership scenario</h2>
+          </div>
+          <p>Each choice creates a different balance of discipline, trust, and commitment.</p>
+        </div>
+
+        <div class="scenario-card">
+          <div class="scenario-brief">
+            <span class="scenario-label">Scenario 01</span>
+            <h3>A teacher is regularly late.</h3>
+            <p>
+              The late arrivals are beginning to affect the first class of the day. Colleagues
+              have noticed, but no one has spoken up.
+            </p>
+            <div class="scenario-meta">
+              <span>School</span>
+              <span>Discipline</span>
+              <span>Relationships</span>
+            </div>
+          </div>
+          <div class="scenario-actions">
+            <p>Choose the leader's response:</p>
+            <div id="scenario-options"></div>
+          </div>
+          <div class="scenario-result" id="scenario-result">
+            <span class="scenario-result-label">Choice analysis</span>
+            <h3>Select an option to see its impact</h3>
+            <p>
+              This tool does not provide a single correct answer. Observe what happens when Lý
+              and Tình are used separately or together.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section class="about-section" id="about">
+        <div>
+          <p class="eyebrow">05 · About the study</p>
+          <h2>A model for reflection,<br />not a formula to apply.</h2>
+        </div>
+        <div class="about-copy">
+          <p>
+            This web app illustrates the conceptual model proposed by Thang Dinh Truong and
+            Philip Hallinger. Their study synthesizes qualitative data from three schools in
+            Vietnam and suggests that effective leadership in this context combines legitimate
+            authority with moral prestige.
+          </p>
+          <p>
+            The indicators in this app are designed only to help users observe relationships
+            among the model's components. They are not empirical measures, a diagnostic tool, or
+            a prescriptive recommendation.
+          </p>
+          <a
+            href="IJEM 2015 Viet - International Journal of leadership in Edu.pdf"
+            target="_blank"
+            rel="noreferrer"
+          >
+            Read the original article <span>↗</span>
+          </a>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <span>Có Uy Leadership Lab</span>
+      <span>Academic illustration · 2026</span>
+    </footer>
+
+    <script src="app.js"></script>
+  </body>
+</html>
